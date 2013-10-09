@@ -11,7 +11,8 @@
 
 
 var Imap = require('imap'),
-    inspect = require('util').inspect;
+    inspect = require('util').inspect,
+    fs = require('fs');
 
 var imap = new Imap(require("./config.js"));
 
@@ -23,28 +24,24 @@ imap.once('ready', function() {
     //noinspection JSUnusedLocalSymbols
     openInbox(function(err, box) {
         if (err) throw err;
-        var f = imap.seq.fetch('1:3', {
-            bodies: 'HEADER.FIELDS (FROM TO SUBJECT DATE)',
-            struct: true
+        var f = imap.seq.fetch('1:*', {
+            bodies: ''
         });
+        var total=0;
         f.on('message', function(msg, seqno) {
-            //console.log('Message #%d', seqno);
+
             var prefix = '(#' + seqno + ') ';
             //noinspection JSUnusedLocalSymbols
             msg.on('body', function(stream, info) {
-                var buffer = '';
-                stream.on('data', function(chunk) {
-                    buffer += chunk.toString('utf8');
-                });
-                stream.once('end', function() {
-                    console.log(prefix + 'Parsed header: %s', JSON.stringify(Imap.parseHeader(buffer)));
-                });
+                total += info.size/(1024*1024);
+                console.log('Message #%d: total %s MB', seqno,total.toFixed(2));
+                stream.pipe(fs.createWriteStream('storage/msg-' + seqno + '-body.txt'));
             });
             msg.once('attributes', function(attrs) {
                 //console.log(prefix + 'Attributes: %s', inspect(attrs, false, 8));
             });
             msg.once('end', function() {
-                console.log(prefix + 'Finished');
+                //console.log(prefix + 'Finished');
             });
         });
         f.once('error', function(err) {
