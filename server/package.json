@@ -1,45 +1,47 @@
 {
-    "name": "Abdero",
-    "description": "Abdero html5 mail client",
-    "version": "0.1.0",
-    "homepage": "https://github.com/parroit/abdero",
-    "author": {
-        "name": "Andrea Parodi",
-        "email": "andrea.parodi@ebansoftware.net"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/parroit/abdero"
-    },
-    "bugs": {
-        "url": "https://github.com/parroit/abdero/issues"
-    },
-    "keywords": [
-        "html5",
-        "mail",
-        "client",
-        "imap",
-        "pop3",
-        "smtp"
-    ],
-    "licenses": [
-        {
-            "type": "MIT",
-            "url": "https://github.com/parroit/abdero/blob/master/LICENSE-MIT"
-        }
-    ],
-    "main": "lib/Abdero",
-    "engines": {
-        "node": "0.10.17"
-    },
-    "scripts": {
-        "test": "grunt test"
-    },
-    "devDependencies": {
-        "grunt-contrib-jshint": "~0.6.4",
-        "grunt-contrib-nodeunit": "~0.2.0",
-        "grunt-contrib-watch": "~0.5.3",
-        "grunt": "~0.4.1"
-    },
-
+  "name": "Abdero",
+  "description": "Abdero html5 mail client",
+  "version": "0.1.0",
+  "homepage": "https://github.com/parroit/abdero",
+  "author": {
+    "name": "Andrea Parodi",
+    "email": "andrea.parodi@ebansoftware.net"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/parroit/abdero"
+  },
+  "bugs": {
+    "url": "https://github.com/parroit/abdero/issues"
+  },
+  "keywords": [
+    "html5",
+    "mail",
+    "client",
+    "imap",
+    "pop3",
+    "smtp"
+  ],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/parroit/abdero/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "lib/Abdero",
+  "engines": {
+    "node": "0.10.17"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "~0.6.4",
+    "grunt-contrib-nodeunit": "~0.2.0",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt": "~0.4.1"
+  },
+  "dependencies": {
+    "imap": "~0.8.3"
+  }
 }
