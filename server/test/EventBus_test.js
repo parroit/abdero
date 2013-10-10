@@ -14,6 +14,95 @@ describe('EventBus',function(){
         })
     });
 
+    describe("emit",function() {
+        it("should broadcast event to matched listeners",function(){
+            var called = false;
+            eventBus.on('test',/^param$/,function(){
+                called = true;
+            });
+
+            eventBus.emit('test','param');
+
+            expect(called).to.be.true
+
+        });
+
+        it("should not broadcast event to non matched listeners",function(){
+            var uncalled = false;
+            eventBus.on('test',/^param$/,function(){
+                uncalled  = true;
+            });
+
+            var called = false;
+            eventBus.on('test',/^param-not$/,function(){
+                called = true;
+            });
+
+
+            eventBus.emit('test','param-not');
+
+            expect(uncalled).to.be.false
+            expect(called).to.be.true
+
+        });
+
+
+        it("should throw on falsy event name",function(){
+            (function () {
+                eventBus.emit('','','');
+            }).should.throw(Error);
+        });
+
+        it("should throw on non string event name",function(){
+            (function () {
+                eventBus.emit(null,'','');
+            }).should.throw(Error);
+
+            (function () {
+                eventBus.emit(undefined,'','');
+            }).should.throw(Error);
+
+            (function () {
+                eventBus.emit(true,'','');
+            }).should.throw(Error);
+
+            (function () {
+                eventBus.emit(/ /,'','');
+            }).should.throw(Error);
+
+            (function () {
+                eventBus.emit(42,'','');
+            }).should.throw(Error);
+
+            (function () {
+                eventBus.emit({},'','');
+            }).should.throw(Error);
+
+            (function () {
+                eventBus.emit(function(){},'','');
+            }).should.throw(Error);
+
+        });
+
+        it("should throw on empty selector",function(){
+            (function () {
+                eventBus.emit('anEvent',null,'');
+            }).should.throw(Error);
+
+            (function () {
+                eventBus.emit('anEvent',undefined,'');
+            }).should.throw(Error);
+
+
+
+        });
+
+        it("should not throw on correct argument types",function(){
+            eventBus.emit('someEvent','some selector');
+        });
+    });
+
+
     describe("on",function() {
         it("should throw on falsy event name",function(){
             (function () {
