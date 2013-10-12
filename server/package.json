@@ -36,9 +36,7 @@
     "test": "grunt test"
   },
   "devDependencies": {
-    "grunt-contrib-jshint": "~0.6.4",
-    "grunt-contrib-nodeunit": "~0.2.0",
-    "grunt-contrib-watch": "~0.5.3",
+
     "grunt": "~0.4.1",
     "grunt-mocha-test": "~0.7.0",
     "chai": "~1.8.0",
@@ -46,6 +44,7 @@
     "sinon-chai": "~2.4.0"
   },
   "dependencies": {
-    "imap": "~0.8.3"
+    "corriera": "~0.1.1",
+    "imapFetcher": "~0.1.1"
   }
 }
