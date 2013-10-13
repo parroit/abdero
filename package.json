@@ -44,7 +44,7 @@
     "sinon-chai": "~2.4.0"
   },
   "dependencies": {
-    "corriera": "~0.1.1",
-    "imap-fetcher": "~0.1.1"
+    "corriera": "~0.1.1"
+
   }
 }
